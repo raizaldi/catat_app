@@ -7,9 +7,13 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
+$routes->group('api', function ($routes) {
+ 
+    $routes->post('login', 'AuthController::login');
 
-$routes->group('api', ['filter' => 'auth'], function ($routes) {
-    $routes->group('coa', function ($routes) {
+    $routes->group('coa', ['filter' => 'auth'], function ($routes) {
+        $routes->post('register', 'AuthController::register');
+
         $routes->get('/', 'ChartOfAccountController::index');
         $routes->post('/', 'ChartOfAccountController::create');
         $routes->get('(:num)', 'ChartOfAccountController::show/$1');
@@ -18,6 +22,4 @@ $routes->group('api', ['filter' => 'auth'], function ($routes) {
     });
 });
 
-$routes->post('api/register', 'AuthController::register');
-$routes->post('api/login', 'AuthController::login');
 

@@ -11,9 +11,7 @@
 </head>
 
 <body>
-  <app-root></app-root>
-  <script src="<?php echo base_url('asset/browser/polyfills.js') ?>" type="module"></script>
-  <script src="<?php echo base_url('asset/browser/main.js') ?>" type="module"></script>
+  <h1>Hello World</h1>
 </body>
 
 </html>
