@@ -7,11 +7,15 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="<?php echo base_url('asset/browser/styles.css') ?>">
+
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
-  <h1>Hello World</h1>
+  <div api="/api/coa">Hello World</div>
+
+  <script src="<?= base_url('asset/js/httpRequest.js')?>"></script>
+  <script src="<?= base_url('asset/js/Table.js')?>"></script>
 </body>
 
 </html>

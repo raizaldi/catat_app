@@ -16,8 +16,8 @@ class JwtLib
     public function createToken($data)
     {
         $payload = [
-            'iss' => 'localhost',
-            'aud' => 'localhost',
+            'iss' => base_url(),
+            'aud' => base_url(),
             'iat' => time(),
             'exp' => time() + 3600,
             'data' => $data

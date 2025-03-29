@@ -66,3 +66,28 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - json (enabled by default - don't turn it off)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+
+
+const API_URL = "https://example.com/api/resource";
+const request = { name: "New Item" };
+const authHeader = { Authorization: "Bearer your_jwt_token" };
+
+// 1. GET Request dengan Authentication
+httpRequest(API_URL, "GET", null, authHeader)
+    .then((data) => console.log("GET Response:", data))
+    .catch((error) => console.error("GET Error:", error));
+
+// 2. POST Request dengan Authentication
+httpRequest(API_URL, "POST", request, authHeader)
+    .then((data) => console.log("POST Response:", data))
+    .catch((error) => console.error("POST Error:", error));
+
+// 3. PUT Request dengan Authentication
+httpRequest(`${API_URL}/1`, "PUT", request, authHeader)
+    .then((data) => console.log("PUT Response:", data))
+    .catch((error) => console.error("PUT Error:", error));
+
+// 4. DELETE Request dengan Authentication
+httpRequest(`${API_URL}/1`, "DELETE", null, authHeader)
+    .then((data) => console.log("DELETE Response:", data))
+    .catch((error) => console.error("DELETE Error:", error));

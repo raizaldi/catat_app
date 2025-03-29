@@ -34,16 +34,25 @@ class AuthController extends ResourceController
         }
     }
 
+    public function AuthView()
+    {
+        try {
+            return view('auth/index');
+        } catch (DataException $e) {
+            throw new \RuntimeException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
     public function login()
     {
         try {
             $model = new UserModel();
-            $data = $this->request->getPost();
-            $user = $model->where('email', $data['email'])->first();
+            $data = $this->request->getJSON();
+            $user = $model->where('email', $data->email)->first();
 
-            if ($user && password_verify($data['password'], $user['password'])) {
-                $token = $this->jwtLib->createToken(['id' => $user['id'],'email' =>$user['email'], 'role' => $user['role']]);
-                return $this->respond(['token' => $token]);
+            if ($user && password_verify($data->password, $user['password'])) {
+                $token = $this->jwtLib->createToken(['id' => $user['id'], 'email' => $user['email'], 'role' => $user['role']]);
+                return $this->respond(['token' => $token, 'exp' => time() + 3600]);
             }
             return $this->failUnauthorized('Invalid credentials');
         } catch (DataException $e) {
