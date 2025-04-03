@@ -1,8 +1,8 @@
 <?= $this->extend('base_template') ?>
 
 <?= $this->section('content') ?>
-<div api="/api/coa"></div>
-    <div class="bg-white p-5 rounded-lg shadow-md">
+
+    <div class="bg-white p-5 rounded-lg shadow-md" api="/api/coa">
         <h2 class="text-lg font-bold">Total Users</h2>
         <p class="text-2xl font-semibold">1,250</p>
     </div>
