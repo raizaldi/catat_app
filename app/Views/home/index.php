@@ -2,18 +2,15 @@
 
 <?= $this->section('content') ?>
 
-    <div class="bg-white p-5 rounded-lg shadow-md" api="/api/coa">
-        <h2 class="text-lg font-bold">Total Users</h2>
-        <p class="text-2xl font-semibold">1,250</p>
-    </div>
-    <div class="bg-white p-5 rounded-lg shadow-md">
-        <h2 class="text-lg font-bold">Total Orders</h2>
-        <p class="text-2xl font-semibold">320</p>
-    </div>
-    <div class="bg-white p-5 rounded-lg shadow-md">
-        <h2 class="text-lg font-bold">Revenue</h2>
-        <p class="text-2xl font-semibold">$12,500</p>
-    </div>
+<div  api="/api/coa">
+    <input id="search-input" type="text" placeholder="Cari..."
+        class="mb-4 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+    <div id="table-container"></div>
+
+    <!-- Pagination -->
+    <div id="pagination" class="mt-4 flex justify-end gap-2"></div>
+</div>
 
 <?= $this->endSection() ?>
 
@@ -28,4 +25,5 @@
 <?= $this->section('menu_bar') ?>
 <h1 class="text-2xl font-bold">Dashboard</h1>
 <p class="mt-4">Welcome to the admin panel!</p>
+
 <?= $this->endSection() ?>
