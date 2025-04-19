@@ -16,7 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
             filteredData = result.data;
             renderTable(filteredData);
         })
-        .catch((error) => console.error("GET Error:", error));
+        .catch((error) => {
+         
+        });
     
     }
 });

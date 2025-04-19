@@ -46,7 +46,12 @@
         function toggleSidebar() {
             document.getElementById("sidebar").classList.toggle("-translate-x-full");
         }
+
+        
+
     </script>
+
+    <script src="<?= base_url('asset/js/validation.js')?>"></script>
 </body>
 
 </html>
