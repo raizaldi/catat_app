@@ -23,9 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
                   */
                 sessionStorage.setItem("jwt_cookies", data.token);
                 window.location.href = "/"; // Redirect setelah login sukses
-            }).catch((error) => {
-                alert("Login gagal: " + data.message);
+            }).catch(error => {
+                console.error("Error:", error);
+                Swal.fire({
+                    title: "Login failed",
+                    text: error.message || "An error occurred during login.",
+                    icon: "error",
+                    draggable: true
             });
+        });
     });
 
 

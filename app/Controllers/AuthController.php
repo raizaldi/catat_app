@@ -46,6 +46,7 @@ class AuthController extends ResourceController
     public function login()
     {
         try {
+            $this->setFormat('json');
             $model = new UserModel();
             $data = $this->request->getJSON();
             $user = $model->where('email', $data->email)->first();
@@ -54,7 +55,7 @@ class AuthController extends ResourceController
                 $token = $this->jwtLib->createToken(['id' => $user['id'], 'email' => $user['email'], 'role' => $user['role']]);
                 return $this->respond(['token' => $token, 'exp' => time() + 3600]);
             }
-            return $this->failUnauthorized('Invalid credentials');
+            return $this->response->setStatusCode(401)->setJSON(['message' => 'email or password is incorrect'],true);
         } catch (DataException $e) {
             throw new \RuntimeException($e->getMessage(), $e->getCode(), $e);
         }

@@ -28,17 +28,39 @@ function httpRequest(url, method, body = null, headers = {}) {
     showLoader(); // Tampilkan loader
 
     return fetch(url, options)
-        .then(response => {
+        .then(async response => {
             hideLoader(); // Sembunyikan loader setelah request selesai
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
 
+            if (!response.ok) {
+                // Try to parse JSON error body to extract API message
+                let errorBody = null;
+                try {
+                    // clone the response so we can read body safely
+                    errorBody = await response.clone().json();
+                } catch (e) {
+                    // If body is not JSON or empty, fall back to text
+                    try {
+                        errorBody = await response.clone().text();
+                    } catch (e2) {
+                        errorBody = null;
+                    }
+                }
+
+                // Build a structured error to throw
+                const err = new Error(
+                    (errorBody && errorBody.message) ? errorBody.message : `HTTP ${response.status}`
+                );
+                err.status = response.status;
+                err.body = errorBody;
+                throw err;
+            }
 
             return response.json();
         })
         .catch(error => {
-            console.error("Request failed:", error);
+            // Ensure loader is hidden on any errors (in case of network errors)
+            hideLoader();
+            // Re-throw so callers can handle it
             throw error;
         });
 }
